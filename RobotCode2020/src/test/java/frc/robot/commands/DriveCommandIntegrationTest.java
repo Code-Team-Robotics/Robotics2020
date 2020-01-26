@@ -9,9 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.concurrent.ExecutionException;
-
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 
 public class DriveCommandIntegrationTest {
@@ -29,7 +26,7 @@ public class DriveCommandIntegrationTest {
     }
 
     @Test
-    public void itDoesntMoveWithoutJoystick() throws InterruptedException, ExecutionException {
+    public void itDoesntMoveWithoutJoystick() throws InterruptedException {
         VictorSPX mock_frontLeft = mock(VictorSPX.class);
         VictorSPX mock_frontRight = mock(VictorSPX.class);
         VictorSPX mock_backLeft = mock(VictorSPX.class);
@@ -37,9 +34,7 @@ public class DriveCommandIntegrationTest {
         RobotJoystick mock_joystick = mock(RobotJoystick.class);
 
         DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
-                (mock_frontLeft, mock_frontRight,
-                        mock_backLeft, mock_backRight, mock_joystick);
-        System.out.println("Successfully created subsystem with mock dependencies");
+                (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);
 
         DriveCommand driveCommand = new DriveCommand(classUnderTest);
 

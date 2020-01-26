@@ -10,7 +10,6 @@ import java.util.Set;
 public class DriveCommand implements Command {
     private final DriveTrainSubsystem driveTrainSubsystem;
 
-
     public DriveCommand(DriveTrainSubsystem driveTrainSubsystem) {
         this.driveTrainSubsystem = driveTrainSubsystem;
     }
@@ -32,7 +31,8 @@ public class DriveCommand implements Command {
     @Override
     public void execute() {
         // Called repeatedly when this Command is scheduled to run:  driveTrainSubsystem.setVictorToMax();
-        driveTrainSubsystem.Motor();
+        // driveTrainSubsystem.Motor();
+        driveTrainSubsystem.DriveForward();
     }
 
     @Override
