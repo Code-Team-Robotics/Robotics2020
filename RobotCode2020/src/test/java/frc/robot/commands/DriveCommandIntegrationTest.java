@@ -11,6 +11,10 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
 
+/*
+    This integration test is to ensure that our subsystems "integrate" or can be called with our commands.
+*/
+
 public class DriveCommandIntegrationTest {
 
     private SchedulerTestHelper schedulerTestHelper;
@@ -25,8 +29,13 @@ public class DriveCommandIntegrationTest {
         schedulerTestHelper.destroy();
     }
 
+    /*
+        Ensures that no signals are sent to the motor-controllers without
+        input from the Joystick
+    */
     @Test
-    public void itDoesntMoveWithoutJoystick() throws InterruptedException {
+    public void itDoesntMoveWithoutJoystickInput() throws InterruptedException {
+        // Assemble
         VictorSPX mock_frontLeft = mock(VictorSPX.class);
         VictorSPX mock_frontRight = mock(VictorSPX.class);
         VictorSPX mock_backLeft = mock(VictorSPX.class);
@@ -35,11 +44,12 @@ public class DriveCommandIntegrationTest {
 
         DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
                 (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);
-
         DriveCommand driveCommand = new DriveCommand(classUnderTest);
 
+        // Act
         schedulerTestHelper.run(driveCommand).forDuration(1);
 
+        // Assert
         Mockito.verifyNoInteractions(mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight);
     }
 }
