@@ -46,7 +46,7 @@ public class DriveCommandUnitTest {
         schedulerTestHelper.run(classUnderTest).forDuration(1).get();
 
         // Assert
-        Mockito.verify(mockDriveTrainSubsystem, atLeastOnce()).Motor();
+        Mockito.verify(mockDriveTrainSubsystem, atLeastOnce()).DriveForward();
     }
 
     /*
@@ -63,7 +63,7 @@ public class DriveCommandUnitTest {
         schedulerTestHelper.run(classUnderTest).forDuration(1).get();
 
         // Assert
-        verify(mockDriveTrainSubsystem, times(1)).Stop();
+        verify(mockDriveTrainSubsystem, times(1)).StopDriving();
     }
 
     /*

@@ -1,8 +1,6 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj2.command.SchedulerTestHelper;
 import frc.robot.RobotJoystick;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -38,11 +36,11 @@ public class DriveCommandIntegrationTest {
     @Test
     public void itDoesntMoveWithoutJoystickInput() throws InterruptedException {
         // Assemble
-        Victor mock_frontLeft = mock(Victor.class);
-        Victor mock_frontRight = mock(Victor.class);
-        Victor mock_backLeft = mock(Victor.class);
-        Victor mock_backRight = mock(Victor.class);
-        Joystick mock_joystick = mock(Joystick.class);
+        VictorSPX mock_frontLeft = mock(VictorSPX.class);
+        VictorSPX mock_frontRight = mock(VictorSPX.class);
+        VictorSPX mock_backLeft = mock(VictorSPX.class);
+        VictorSPX mock_backRight = mock(VictorSPX.class);
+        RobotJoystick mock_joystick = mock(RobotJoystick.class);
 
         DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
                 (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);

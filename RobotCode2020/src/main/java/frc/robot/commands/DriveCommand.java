@@ -20,7 +20,7 @@ public class DriveCommand implements Command {
     @Override
     public Set<Subsystem> getRequirements() {
         Set<Subsystem> subsystems = new HashSet<>();
-        subsystems.add(this.driveTrainSubsystem);
+        subsystems.add((Subsystem) this.driveTrainSubsystem);
         return subsystems;
     }
 
@@ -35,7 +35,7 @@ public class DriveCommand implements Command {
     // driveTrainSubsystem.Motor();
     @Override
     public void execute() {
-        driveTrainSubsystem.Motor();
+        driveTrainSubsystem.DriveForward();
     }
 
     // This returns a boolean that will stop the command from executing
@@ -48,7 +48,7 @@ public class DriveCommand implements Command {
     // Called once isFinished returns 'true':  driveTrainSubsystem.setVictorToZero();
     @Override
     public void end(boolean interrupted) {
-        driveTrainSubsystem.Stop();
+        driveTrainSubsystem.StopDriving();
     }
 
     // Called when another command which requires one
