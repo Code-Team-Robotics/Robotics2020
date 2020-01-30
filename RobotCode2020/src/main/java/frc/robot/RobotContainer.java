@@ -10,7 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,10 +26,10 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 public class RobotContainer
 {
     // Declare hardware
-    public final Victor victorSPX_frontLeft;
-    public final Victor victorSPX_frontRight;
-    public final Victor victorSPX_backLeft;
-    public final Victor victorSPX_backRight;
+    public final VictorSPX victorSPX_frontLeft;
+    public final VictorSPX victorSPX_frontRight;
+    public final VictorSPX victorSPX_backLeft;
+    public final VictorSPX victorSPX_backRight;
 
     public final ColorSensorV3 colorSensorV3;
 
@@ -47,10 +47,10 @@ public class RobotContainer
     public RobotContainer()
     {
         super();
-        this.victorSPX_frontLeft = new Victor(RobotMap.ID_1);
-        this.victorSPX_frontRight = new Victor(RobotMap.ID_2);
-        this.victorSPX_backLeft = new Victor(RobotMap.ID_3);
-        this.victorSPX_backRight = new Victor(RobotMap.ID_4);
+        this.victorSPX_frontLeft = new VictorSPX(RobotMap.ID_1);
+        this.victorSPX_frontRight = new VictorSPX(RobotMap.ID_2);
+        this.victorSPX_backLeft = new VictorSPX(RobotMap.ID_3);
+        this.victorSPX_backRight = new VictorSPX(RobotMap.ID_4);
 
         this.colorSensorV3 = new ColorSensorV3(RobotMap.i2cPort);
 
@@ -76,7 +76,7 @@ public class RobotContainer
 
     private void configureButtonBindings()
     {
-        this.button.toggleWhenActive(driveCommand);
+        this.button.whileHeld(driveCommand);
     }
 
 

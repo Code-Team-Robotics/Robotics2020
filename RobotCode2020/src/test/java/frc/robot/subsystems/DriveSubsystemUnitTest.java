@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Victor;
 import frc.robot.RobotJoystick;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -23,18 +21,14 @@ public class DriveSubsystemUnitTest {
     */
     @Test(expected = Test.None.class)
     public void itShouldInstantiateGivenDependencies() {
-        // Assemble
-        Victor mock_frontLeft = mock(Victor.class);
-        Victor mock_frontRight = mock(Victor.class);
-        Victor mock_backLeft = mock(Victor.class);
-        Victor mock_backRight = mock(Victor.class);
-        Joystick mock_joystick = mock(Joystick.class);
+        VictorSPX mock_frontLeft = mock(VictorSPX.class);
+        VictorSPX mock_frontRight = mock(VictorSPX.class);
+        VictorSPX mock_backLeft = mock(VictorSPX.class);
+        VictorSPX mock_backRight = mock(VictorSPX.class);
+        RobotJoystick mock_joystick = mock(RobotJoystick.class);
 
-        // Act
         DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
                 (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);
-
-        // Assert
     }
 
     /*
@@ -64,21 +58,24 @@ public class DriveSubsystemUnitTest {
         This test verifies that the motor controllers are set to the correct values
         when the method is run
     */
-//    @Test
-//    public void itShouldDriveForward() {
-//        // Assemble
-//        Victor mock_frontLeft = mock(Victor.class);
-//        Victor mock_frontRight = mock(Victor.class);
-//        Victor mock_backLeft = mock(Victor.class);
-//        Victor mock_backRight = mock(Victor.class);
-//        Joystick mock_joystick = mock(Joystick.class);
-//        DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
-//                (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);
-//
-//        // Act
-//        classUnderTest.Motor();
-//
-//        // Assert
-//        Mockito.verify
-//    }
+    @Test
+    public void itShouldDriveForward() {
+        // Assemble
+        VictorSPX mock_frontLeft = mock(VictorSPX.class);
+        VictorSPX mock_frontRight = mock(VictorSPX.class);
+        VictorSPX mock_backLeft = mock(VictorSPX.class);
+        VictorSPX mock_backRight = mock(VictorSPX.class);
+        RobotJoystick mock_joystick = mock(RobotJoystick.class);
+        DriveTrainSubsystem classUnderTest = new DriveTrainSubsystem
+                (mock_frontLeft, mock_frontRight, mock_backLeft, mock_backRight, mock_joystick);
+
+        // Act
+        classUnderTest.DriveForward();
+
+        // Assert
+        Mockito.verify(mock_frontLeft, atLeastOnce()).set(ControlMode.PercentOutput, 1);
+        Mockito.verify(mock_backLeft, atLeastOnce()).set(ControlMode.PercentOutput, 1);
+        Mockito.verify(mock_frontRight, atLeastOnce()).set(ControlMode.PercentOutput, -1);
+        Mockito.verify(mock_backRight, atLeastOnce()).set(ControlMode.PercentOutput, -1);
+    }
 }
